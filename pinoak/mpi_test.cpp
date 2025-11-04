@@ -49,8 +49,8 @@ int main(int argc, char** argv) {
 		
 		int N;
 		if (rank == 0) {
-      N = dist(gen); // Random buffer size chosen by rank 0
-      // N = 2048;
+      // N = dist(gen); // Random buffer size chosen by rank 0
+      N = 512*1024;
 		}
 
 		// Broadcast buffer size to all ranks

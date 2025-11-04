@@ -1,11 +1,14 @@
 #!/bin/bash -l
 
-module purge
-module load cpe/24.11 PrgEnv-amd craype-accel-amd-gfx90a amd rocm
+rm -rf mpi_test
+
+unset LD_LIBRARY_PATH
+module load cpe/25.09 PrgEnv-amd amd/6.4.1 rocm/6.4.1
 module load craype-x86-trento
+module load craype-accel-amd-gfx90a
 module unload darshan-runtime
+
 export LD_LIBRARY_PATH=$CRAY_LD_LIBRARY_PATH:$LD_LIBRARY_PATH
 export MPICH_GPU_SUPPORT_ENABLED=1
-
 CC -std=c++17 -Wno-unused-result mpi_test.cpp -o mpi_test
 
