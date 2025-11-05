@@ -37,7 +37,7 @@ int main(int argc, char** argv) {
   // Random number generator only on rank 0
   std::random_device rd;
   std::mt19937 gen(rd());
-  std::uniform_int_distribution<> dist(1, 512);
+  std::uniform_int_distribution<> dist(1, 1024);
 
   float* d_sendbuf = nullptr;
   float* d_recvbuf = nullptr;
@@ -49,8 +49,8 @@ int main(int argc, char** argv) {
     
     int N;
     if (rank == 0) {
-      N = 512*dist(gen); // Random buffer size chosen by rank 0
-      // N = 512*1024;
+      // N = 256*dist(gen); // Random buffer size chosen by rank 0
+      N = 256*1024;
     }
 
     // Broadcast buffer size to all ranks
