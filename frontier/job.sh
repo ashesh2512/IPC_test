@@ -7,11 +7,10 @@
 
 monitordir=logs
 mkdir $monitordir
-./compile.sh
-sleep 5
 
 module purge
-module load cpe/25.09 PrgEnv-amd amd/6.4.1 rocm/6.4.1
+module load cpe/26.03 PrgEnv-amd amd/7.2.0 rocm/7.2.0
+module load cray-mpich/9.1.0
 module load craype-x86-trento
 module load craype-accel-amd-gfx90a
 module unload darshan-runtime
@@ -19,13 +18,8 @@ export LD_LIBRARY_PATH=$CRAY_LD_LIBRARY_PATH:$LD_LIBRARY_PATH
 
 export MPICH_GPU_SUPPORT_ENABLED=1
 export MPICH_GPU_IPC_ENABLED=1
-export GTL_DISABLE_HSA_IPC_SIGNAL_CACHE=0
-export MPICH_GPU_IPC_CACHE_MAX_SIZE=1
-#export MPICH_GPU_IPC_THRESHOLD=0
-#export GTL_HSA_VSMSG_CUTOFF_SIZE=0
-#export MPICH_GPU_A_A_MEMCPY_THRESHOLD=0
-# export GTL_VERBOSE=1
-# export GTL_VERBOSE2=1
+export GTL_ENABLE_HSA_IPC_SIGNAL_CACHE=1
+export HSA_ENABLE_IPC_MODE_LEGACY=1
 
 module list
 
